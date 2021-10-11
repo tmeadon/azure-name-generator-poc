@@ -1,0 +1,4 @@
+{
+    "resource": "name-{with}-{tokens}",
+    "vm": "vm-{env}-{location}-{app}"
+}
