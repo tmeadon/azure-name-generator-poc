@@ -26,3 +26,4 @@ The `example` directory contains an example showing how this can be used.  The f
 ```powershell
 .\New-NamingBicep.ps1 -TemplateJsonPath .\example\naming\templates.json -OutputFile .\example\naming\naming.bicep
 ```
+
