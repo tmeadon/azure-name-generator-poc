@@ -1,4 +1,4 @@
-# New-NamingBicep.ps1
+# Build-BicepNamingModule
 
 This script creates a `bicep` module file that can be used to generate Azure resource names based on templates defined in an input file.  The script requires the following parameters:
 
@@ -24,5 +24,5 @@ This will generate a `bicep` module with the parameters: `env`, `location` and `
 The `example` directory contains an example showing how this can be used.  The file `example/naming/naming.bicep` was produced by running the following command:
 
 ```powershell
-.\New-NamingBicep.ps1 -TemplateJsonPath .\example\naming\templates.json -OutputFile .\example\naming\naming.bicep
+.\Build-BicepNamingModule.ps1 -TemplateJsonPath .\example\naming\templates.json -OutputFile .\example\naming\naming.bicep
 ```
