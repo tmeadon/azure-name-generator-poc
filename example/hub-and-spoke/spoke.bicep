@@ -7,7 +7,7 @@ param subnets array
 param hubVnetName string
 
 module naming 'modules/naming.bicep' = {
-  name: '${appName}-spoke'
+  name: '${appName}-${env}-spoke-naming'
   params: {
     app: appName
     env: env
@@ -16,7 +16,7 @@ module naming 'modules/naming.bicep' = {
 }
 
 module vnet 'modules/vnet.bicep' = {
-  name: '${appName}-vnet'
+  name: '${appName}-${env}-vnet'
   params: {
     addressPrefix: addressPrefix
     location: location
@@ -26,7 +26,7 @@ module vnet 'modules/vnet.bicep' = {
 }
 
 module vnetToHubPeering 'modules/peering.bicep' = {
-  name: '${appName}-vnetToHubPeering'
+  name: '${appName}-${env}-vnetToHubPeering'
   params: {
     remoteVnetName: hubVnetName
     vnetName: naming.outputs.vnet
@@ -37,7 +37,7 @@ module vnetToHubPeering 'modules/peering.bicep' = {
 }
 
 module hubtoVnetPeering 'modules/peering.bicep' = {
-  name: '${appName}-hubToVnetPeering'
+  name: '${appName}-${env}-hubToVnetPeering'
   params: {
     remoteVnetName: naming.outputs.vnet
     vnetName: hubVnetName
