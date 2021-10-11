@@ -1,12 +1,9 @@
 param name string
 param location string
-param addressPrefix string = '10.0.0.0/16'
-param subnets array = [
-  {
-    name: 'subnet0'
-    addressPrefix: '10.0.0.0/24'
-  }
-]
+param addressPrefix string
+
+@description('A list of objects with the following properties: name, addressPrefix')
+param subnets array
 
 resource vnet 'Microsoft.Network/virtualNetworks@2019-11-01' = {
   name: name
@@ -26,4 +23,4 @@ resource vnet 'Microsoft.Network/virtualNetworks@2019-11-01' = {
   }
 }
 
-output subnetIds array = [for (item, index) in subnets: vnet.properties.subnets[index].id ]
+output vnetName string = vnet.name

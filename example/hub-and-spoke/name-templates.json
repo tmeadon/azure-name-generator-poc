@@ -1,0 +1,7 @@
+{
+    "vnet": "vnet-{env}-{location}-{app}",
+    "bastion": "bst-{env}-{location}-{app}",
+    "bastionPip": "bst-{env}-{location}-{app}-pip",
+    "firewall": "fw-{env}-{location}-{app}",
+    "firewallPip": "fw-{env}-{location}-{app}-pip"
+}

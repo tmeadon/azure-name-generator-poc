@@ -1,5 +1,0 @@
-{
-    "storage": "stg{env}{loc}{app}",
-    "vm": "vm{env}{loc}{app}",
-    "vnet": "vnet-{env}-{loc}-{app}"
-}
