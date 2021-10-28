@@ -9,7 +9,12 @@ param
     # Output file path
     [Parameter()]
     [string]
-    $OutputFile = 'naming.bicep'
+    $OutputFile = 'naming.bicep',
+
+    # Don't prompt if the naming module already exists
+    [Parameter()]
+    [switch]
+    $Force
 )
 
 # validate input file exists
@@ -32,12 +37,7 @@ foreach ($key in $data.Keys)
 }
 
 # build the bicep template's parameter lines
-$paramLines = ""
-
-foreach ($token in $allTokens)
-{
-    $paramLines += "param $($token) string`n"
-}
+$paramLine = "param namingComponents object"
 
 # build the bicep template's output lines
 $outputLines = ""
@@ -48,7 +48,7 @@ foreach ($resource in $data.Keys)
     
     foreach ($token in $allTokens)
     {
-        $outputValue = "replace($outputValue, '{$token}', $token)"
+        $outputValue = "replace($outputValue, '{$token}', namingComponents.$token)"
     }
 
     $outputLines += "output $resource string = $outputValue`n"
@@ -56,14 +56,14 @@ foreach ($resource in $data.Keys)
 
 # build the string for the whole template
 $template = @"
-$paramLines
+$paramLine`n
 $outputLines
 "@
 
 # write the template out to disk
 $outputFileExists = Test-Path -Path $OutputFile
 
-if ((!$outputFileExists) -or ($PSCmdlet.ShouldContinue("This will overwrite $OutputFile, continue?", "$OutputFile already exists")))
+if ($Force -or ((!$outputFileExists) -or ($PSCmdlet.ShouldContinue("This will overwrite $OutputFile, continue?", "$OutputFile already exists"))))
 {
     Set-Content -Path $OutputFile -Value $template
     $OutputFile

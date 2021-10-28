@@ -9,9 +9,11 @@ param hubVnetName string
 module naming 'modules/naming.bicep' = {
   name: '${appName}-${env}-spoke-naming'
   params: {
-    app: appName
-    env: env
-    location: shortLocation
+    namingComponents: {
+      app: appName
+      env: env
+      location: shortLocation
+    }
   }
 }
 

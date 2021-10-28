@@ -1,9 +1,11 @@
 module naming 'naming/naming.bicep' = {
   name: 'naming'
   params: {
-    app: 'app1'
-    env: 'prd'
-    loc: 'uks'
+    namingComponents: {
+      app: 'app1'
+      env: 'prd'
+      loc: 'uks'  
+    }
   }
 }
 
